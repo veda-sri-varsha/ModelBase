@@ -45,10 +45,12 @@ app.get("/user", async (req, res) => {
   try {
     // const {email} = req.body;
     const email = req.query.email; // Use query parameter for email
+    // const user = await User.findOne({ email });
+    if (!email) return res.status(400).send("Email query parameter is required");
+
     const user = await User.findOne({ email });
-    if (!user) {
-      return res.status(404).send("User not found");
-    }
+    if (!user) return res.status(404).send("User not found");
+
     res.send(user);
   } catch (err) {
     res.status(500).send("Error fetching user: " + err.message);
@@ -68,6 +70,8 @@ app.get("/feed", async (req, res) => {
 // Delete a user
 app.delete("/user", async (req, res) => {
   const userId = req.body.userId;
+  if (!userId) return res.status(400).send("userId is required");
+
 
   try {
     // const email = req.body.email;
@@ -88,19 +92,25 @@ app.patch("/user", async (req, res) => {
   const userId = req.query.userId;
   const data = req.body;
 
+  if (!userId) return res.status(400).send("userId query parameter is required");
+
+
   try {
     const allowedUpdates = ["name", "age"];
     const isValidOperation = Object.keys(data).every((key) =>
       allowedUpdates.includes(key)
     );
-    
+
 
     if (!isValidOperation) {
-      throw new Error("Invalid updates!");
+      throw new Error("Invalid updates! Only 'name' and 'age' are allowed.");
     }
-   
+
+
     const user = await User.findByIdAndUpdate({ _id: userId }, data, {
       returnDocument: "after",
+      new: true,          // Return the updated document
+      runValidators: true
     });
     if (!user) {
       return res.status(404).send("User not found");
