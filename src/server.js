@@ -2,7 +2,10 @@ import express from "express";
 import connectDB from "./config/database.js";
 import User from "./model/User.js";
 import cookieParser from "cookie-parser";
-import UserAuth from "../src/middleware/UserAuth.js";
+import UserAuth from "./middleware/UserAuth.js";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const app = express();
 app.use(express.json());
@@ -23,13 +26,14 @@ app.get("/feed", async (req, res) => {
   }
 });
 
-
 connectDB()
   .then(() => {
     console.log("Database connection established...");
 
-    app.listen(7000, () => {
-      console.log("Server is successfully listening on port 7000...");
+    app.listen(process.env.PORT, () => {
+      console.log(
+        `Server is Listening on http://localhost:${process.env.PORT}`
+      );
     });
   })
   .catch((err) => {
