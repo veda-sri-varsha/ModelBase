@@ -2,7 +2,7 @@ import express from "express";
 import connectDB from "./config/database.js";
 import User from "./model/User.js";
 import cookieParser from "cookie-parser";
-import UserAuth from "./middeleware/UserAuth.js";
+import UserAuth from "../src/middleware/UserAuth.js";
 
 const app = express();
 app.use(express.json());
