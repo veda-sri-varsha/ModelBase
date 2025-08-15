@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 
 const connectDB = async () => {
   await mongoose.connect(
-    "mongodb+srv://vedasrivarsha1126:BtUR1CfPeQhwfcFN@devtinnder.0pnwsxj.mongodb.net/?retryWrites=true&w=majority&appName=DevTinnder"
+    "mongodb+srv://vedasrivarsha1126:s8lUvJUokXRk3S9x@dev.wfbantt.mongodb.net/?retryWrites=true&w=majority&appName=dev"
   );
 };
 
