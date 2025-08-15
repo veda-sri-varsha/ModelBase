@@ -1,8 +1,7 @@
-import express from 'express';
-import UserAuth from '../../middleware/UserAuth';
+import express from "express";
+import UserAuth from "../../middleware/UserAuth";
 
 const router = express.Router();
-
 
 router.get("/profile", UserAuth, async (req, res) => {
   try {
