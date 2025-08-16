@@ -1,5 +1,5 @@
 import express from "express";
-import UserAuth from "../../middleware/UserAuth";
+import UserAuth from "../../middleware/UserAuth.js";
 
 const router = express.Router();
 
@@ -15,3 +15,5 @@ router.get("/profile", UserAuth, async (req, res) => {
     res.send("Error:" + err.message);
   }
 });
+
+export default router;
