@@ -5,7 +5,10 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const connectDB = async () => {
-  await mongoose.connect(process.env.DATABASE_URL);
+  await mongoose.connect(process.env.DATABASE_URL, {
+    tls: true, // enforce TLS
+    tlsAllowInvalidCertificates: false,
+  });
 };
 
 connectDB();
