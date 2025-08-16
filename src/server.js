@@ -5,11 +5,25 @@ import cookieParser from "cookie-parser";
 import UserAuth from "./middleware/UserAuth.js";
 import dotenv from "dotenv";
 
+import signupRoutes from "./routes/auth/signup.js";
+import loginRoutes from "./routes/auth/login.js";
+import logoutRoutes from "./routes/auth/logout.js";
+import profileRoutes from "./routes/profile/profile.js";
+import forgotPasswordRoutes from "./routes/auth/forgotPassword.js";
+
 dotenv.config();
+
 
 const app = express();
 app.use(express.json());
 app.use(cookieParser());
+
+app.use("/auth", signupRoutes);
+app.use("/auth", loginRoutes);
+app.use("/auth", logoutRoutes);
+app.use("/auth", forgotPasswordRoutes);
+app.use("/profile", profileRoutes);
+
 
 app.post("/sendRequest", UserAuth, async (req, res) => {
   const user = req.user;
