@@ -1,6 +1,7 @@
 import express from 'express';
 import validateSignupData from "../../utils/validation.js";
-
+import bcrypt from 'bcrypt';
+import User from '../../model/User.js';
 
 const router = express.Router();
 
@@ -21,7 +22,10 @@ router.post("/signup", async (req, res) => {
 
     await user.save();
     res.send("User added successfully!");
+    console.log(user);
   } catch (err) {
     res.status(400).send("Error: " + err.message);
   }
 });
+
+export default router;
