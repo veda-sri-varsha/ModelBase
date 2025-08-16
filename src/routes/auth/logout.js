@@ -9,3 +9,5 @@ router.post("/logout", (req, res) => {
   });
   res.send("Logged out successfully!");
 });
+
+export default router;
